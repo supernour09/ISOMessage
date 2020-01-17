@@ -1,11 +1,15 @@
 package com.finhive.ISOreader;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jpos.iso.ISOException;
 import org.jpos.iso.ISOMsg;
 import org.jpos.iso.packager.GenericPackager;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,11 +21,13 @@ public class MessageReader {
 
 		
 	@PostMapping("/IsoMessage")
-	public Map<String, String> reader(@RequestBody Map<String, String> IsoMessage) throws ISOException   {
-        GenericPackager packager = new GenericPackager(
-                "../ISOreader/iso87ascii.xml");
+	public Map<String, String> reader(@RequestBody Map<String, String> IsoMessage) throws ISOException, IOException   {
+		Resource resource = new ClassPathResource("iso87ascii.xml");
+
+		InputStream input = resource.getInputStream();
+		GenericPackager packager = new GenericPackager(input);
  
-        
+     
         String TempStr = IsoMessage.get("IsoMessage");
         System.out.println(TempStr);
         Map<String, String> ret = new HashMap<String,String>();
