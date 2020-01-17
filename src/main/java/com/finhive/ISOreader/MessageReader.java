@@ -19,7 +19,7 @@ public class MessageReader {
 	@PostMapping("/IsoMessage")
 	public Map<String, String> reader(@RequestBody Map<String, String> IsoMessage) throws ISOException   {
         GenericPackager packager = new GenericPackager(
-                "../ISOreader/iso87ascii.xml");
+                "../iso87ascii.xml");
  
         
         String TempStr = IsoMessage.get("IsoMessage");
