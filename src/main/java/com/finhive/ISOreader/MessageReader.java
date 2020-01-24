@@ -27,7 +27,7 @@ public class MessageReader {
 		InputStream input = resource.getInputStream();
 		GenericPackager packager = new GenericPackager(input);
  
-     
+        
         String TempStr = IsoMessage.get("IsoMessage");
         System.out.println(TempStr);
         Map<String, String> ret = new HashMap<String,String>();
