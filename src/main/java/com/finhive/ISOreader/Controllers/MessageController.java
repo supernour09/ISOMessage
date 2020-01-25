@@ -1,4 +1,4 @@
-package com.finhive.ISOreader;
+package com.finhive.ISOreader.Controllers;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,17 +10,17 @@ import org.jpos.iso.ISOMsg;
 import org.jpos.iso.packager.GenericPackager;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.minidev.json.JSONObject;
 
 @RestController
-public class MessageReader {
+@RequestMapping("api/IsoMessage")
+public class MessageController {
 
 		
-	@PostMapping("/IsoMessage")
+	
 	public Map<String, String> reader(@RequestBody Map<String, String> IsoMessage) throws ISOException, IOException   {
 		Resource resource = new ClassPathResource("iso87ascii.xml");
 
@@ -55,7 +55,13 @@ public class MessageReader {
         }
         return ret;
 		
-	}
+    }
+    
+    
+    public String getMethodName() {
+        return "Get Functions";
+    }
+    
 
 	
 	
