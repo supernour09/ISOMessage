@@ -1,7 +1,7 @@
 package com.finhive.ISOreader.Models;
 
 import javax.persistence.*;
-
+import java.util.*;
 
 
 
@@ -13,7 +13,7 @@ public class User{
     private long id;
 
     @Column(nullable = false)
-    private String email;
+    private String Email;
 
     @Column(nullable = false)
     private String password;
@@ -25,12 +25,22 @@ public class User{
     private long roleId;
 
     @Column(nullable = false)
-    private int status;
+	private int status;
+	
+	@ManyToMany
+    @JoinTable( 
+        name = "users_roles", 
+        joinColumns = @JoinColumn(
+          name = "user_id", referencedColumnName = "id"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "role_id", referencedColumnName = "id")) 
+    private Collection<Role> roles;
 
-    
+	public User(){}
+	
 	public User(String email, String password, String token, long roleId,int status) {
 		super();
-		this.email = email;
+		this.Email = email;
 		this.password = password;
 		this.token = token;
 		this.roleId = roleId;
@@ -38,11 +48,11 @@ public class User{
 	}
 
 	public String getEmail() {
-		return email;
+		return Email;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.Email = email;
 	}
 
 	public String getPassword() {

@@ -1,9 +1,10 @@
 package com.finhive.ISOreader.Models;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
-public class Permissions {
+public class Privilege {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,7 +13,14 @@ public class Permissions {
 	@Column(nullable = false)
 	private String name;
 
-	public Permissions(String name) {
+	@ManyToMany(mappedBy = "privileges")
+	private Collection<Role> roles;
+
+	public Privilege(){
+		
+	}
+
+	public Privilege(String name) {
 		super();
 		this.name = name;
 	}

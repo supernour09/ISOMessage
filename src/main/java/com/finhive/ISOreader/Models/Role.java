@@ -1,6 +1,7 @@
 package com.finhive.ISOreader.Models;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class Role{
@@ -10,12 +11,27 @@ public class Role{
     private long id;
 
     @Column(nullable = false)
-    private String name;
+	private String name;
+	
+	@ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
+ 
+    @ManyToMany
+    @JoinTable(
+        name = "roles_privileges", 
+        joinColumns = @JoinColumn(
+          name = "role_id", referencedColumnName = "id"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "privilege_id", referencedColumnName = "id"))
+    private Collection<Privilege> privileges; 
+
+	public Role(){}
 
 	public Role(String name) {
 		super();
 		this.name = name;
 	}
+
 
 	public long getId() {
 		return id;

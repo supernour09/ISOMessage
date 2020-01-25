@@ -1,4 +1,4 @@
-package com.finhive.ISOreader.Config;
+package com.finhive.ISOreader;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@ComponentScan(basePackages ="com.finhive.ISOreader" )
+@ComponentScan
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // Create 2 users for demo
